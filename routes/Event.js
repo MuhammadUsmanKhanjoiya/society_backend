@@ -5,7 +5,7 @@ import { getAllEvent, addEvent, updateEvent, deleteEvent } from '../controllers/
 const router = express.Router();
 
 
-router.get('/', authorizRole("admin"), getAllEvent); // Get all events
+router.get('/', getAllEvent); // Get all events
 router.post('/', verifyToken, authorizRole("admin"), addEvent); // Create a new event    
 router.put('/:id', verifyToken, authorizRole("admin"), updateEvent); // Update an event by ID
 router.delete('/:id', verifyToken, authorizRole("admin"), deleteEvent); // Delete an event by ID
