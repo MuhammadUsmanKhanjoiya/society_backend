@@ -1,17 +1,7 @@
+
 import express from "express"
-import dotenv from "dotenv"
-
-// Force load environment variables
-console.log("🔄 Loading environment variables...")
-dotenv.config()
-
-// Additional environment loading attempts
-if (process.env.NODE_ENV === "production") {
-  console.log("🚀 Production mode detected")
-} else {
-  console.log("🛠️ Development mode detected")
-}
-
+import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors"
 import DBconnection from "./utils/db.js";
 import AuthRoutes from './routes/AuthRoutes.js'
@@ -27,11 +17,6 @@ import staffRoutes from './routes/staffRoutes.js'
 
 const app = express();
 
-console.log('Environment check:', {
-  NODE_ENV: process.env.NODE_ENV,
-  JWT_SECRET_EXISTS: !!process.env.JWT_SECRET,
-  JWT_SECRET_LENGTH: process.env.JWT_SECRET?.length
-});
 app.get("/env-check", (req, res) => {
   res.json({ jwtSecret: process.env.JWT_SECRET || "NOT SET" });
 });

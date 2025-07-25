@@ -1,19 +1,6 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
- // Enhanced debugging
-  console.log("=== JWT MIDDLEWARE DEBUG ===")
-  console.log("NODE_ENV:", process.env.NODE_ENV)
-  console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET)
-  console.log("JWT_SECRET length:", process.env.JWT_SECRET?.length)
-  console.log(
-    "All JWT env vars:",
-    Object.keys(process.env).filter((key) => key.includes("JWT")),
-  )
-  console.log("VERCEL_ENV:", process.env.VERCEL_ENV)
-  console.log("================================")
-
-
 
   let token;
   let authHeader = req.headers.authorization || req.headers.Authorization;
@@ -28,13 +15,13 @@ const verifyToken = (req, res, next) => {
 
 
     // Check if JWT_SECRET exists
-    if (!process.env.JWT_SECRET) {
+    if (!process.env.APP_society_jwt_secret) {
       console.error("JWT_SECRET is not set!")
       return res.status(500).json({ message: "Server configuration error" })
     }
 
     try {
-      const decodrd = jwt.verify(token, process.env.JWT_SECRET , (err, decoded) => {
+      const decodrd = jwt.verify(token, process.env.APP_society_jwt_secret , (err, decoded) => {
         if (err) {
           console.error("JWT Verification Error:", err.message); // DEBUG
           return res.status(401).json({ message: "Token is not valid" });
