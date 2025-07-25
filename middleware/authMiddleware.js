@@ -1,6 +1,20 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
+ // Enhanced debugging
+  console.log("=== JWT MIDDLEWARE DEBUG ===")
+  console.log("NODE_ENV:", process.env.NODE_ENV)
+  console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET)
+  console.log("JWT_SECRET length:", process.env.JWT_SECRET?.length)
+  console.log(
+    "All JWT env vars:",
+    Object.keys(process.env).filter((key) => key.includes("JWT")),
+  )
+  console.log("VERCEL_ENV:", process.env.VERCEL_ENV)
+  console.log("================================")
+
+
+
   let token;
   let authHeader = req.headers.authorization || req.headers.Authorization;
   if (authHeader && authHeader.startsWith("Bearer ")) {

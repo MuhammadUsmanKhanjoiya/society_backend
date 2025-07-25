@@ -1,9 +1,17 @@
-
 import express from "express"
-import dotenv from "dotenv";
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
+import dotenv from "dotenv"
+
+// Force load environment variables
+console.log("🔄 Loading environment variables...")
+dotenv.config()
+
+// Additional environment loading attempts
+if (process.env.NODE_ENV === "production") {
+  console.log("🚀 Production mode detected")
+} else {
+  console.log("🛠️ Development mode detected")
 }
+
 import cors from "cors"
 import DBconnection from "./utils/db.js";
 import AuthRoutes from './routes/AuthRoutes.js'
