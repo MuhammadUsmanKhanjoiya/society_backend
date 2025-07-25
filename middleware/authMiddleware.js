@@ -11,6 +11,14 @@ const verifyToken = (req, res, next) => {
         .status(401)
         .json({ message: "No token provided, authorization denied" });
     }
+
+
+    // Check if JWT_SECRET exists
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is not set!")
+      return res.status(500).json({ message: "Server configuration error" })
+    }
+
     try {
       const decodrd = jwt.verify(token, process.env.JWT_SECRET , (err, decoded) => {
         if (err) {
