@@ -1,6 +1,7 @@
 
 import express from "express"
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors"
 import DBconnection from "./utils/db.js";
 import AuthRoutes from './routes/AuthRoutes.js'
@@ -13,7 +14,7 @@ import userRouter from "./routes/userRoutes.js";
 import maintenanceBillRoutes from './routes/maintenanceBill.js' 
 import chatRoutes from './routes/chatRoutes.js'
 import staffRoutes from './routes/staffRoutes.js'
-dotenv.config();
+
 const app = express();
 
 app.get("/env-check", (req, res) => {
