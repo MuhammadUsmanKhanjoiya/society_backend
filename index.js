@@ -13,7 +13,6 @@ import userRouter from "./routes/userRoutes.js";
 import maintenanceBillRoutes from './routes/maintenanceBill.js' 
 import chatRoutes from './routes/chatRoutes.js'
 import staffRoutes from './routes/staffRoutes.js'
-dotenv.config()
 const app = express();
 
 app.get("/env-check", (req, res) => {
