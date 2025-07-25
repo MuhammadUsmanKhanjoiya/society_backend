@@ -12,7 +12,13 @@ const verifyToken = (req, res, next) => {
         .json({ message: "No token provided, authorization denied" });
     }
     try {
-      const decodrd = jwt.verify(token, process.env.JWT_SECRET);
+      const decodrd = jwt.verify(token, process.env.JWT_SECRET , (err, decoded) => {
+        if (err) {
+          console.error("JWT Verification Error:", err.message); // DEBUG
+          return res.status(401).json({ message: "Token is not valid" });
+        }
+        return decoded;
+      });
       req.user = decodrd;
        console.log("Decoded Token:", req.user); // DEBUG
       console.log("Decoded Token:", req.user);
