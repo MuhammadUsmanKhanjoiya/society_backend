@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   let authHeader = req.headers.authorization || req.headers.Authorization;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     token = authHeader.split(" ")[1];
-
+     console.log("Incoming Token:", token); // DEBUG
     if (!token) {
       return res
         .status(401)
@@ -14,11 +14,12 @@ const verifyToken = (req, res, next) => {
     try {
       const decodrd = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decodrd;
+       console.log("Decoded Token:", req.user); // DEBUG
       console.log("Decoded Token:", req.user);
       next();
     } catch (error) {
-      
-      res.status(401).json({ message: "Token is not valid" });
+       console.error("JWT Error:", error.message); // DEBUG
+      res.status(401).json({ message: "Token is not valid" , error: error.message });
     }
   } else {
     return res
