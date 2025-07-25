@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/", verifyToken, authorizRole("admin"), addAnnouncement);
 
 // ✅ Get all announcements (Admin + Members)
-router.get("/",verifyToken, authorizRole("admin", "member"), getAllAnnouncements);
+router.get("/", getAllAnnouncements);
 
 // ✅ Update announcement (Admin only)
 router.put("/:id",verifyToken, authorizRole("admin"), updateAnnouncement);
