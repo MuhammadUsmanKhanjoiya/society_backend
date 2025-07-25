@@ -16,7 +16,9 @@ import staffRoutes from './routes/staffRoutes.js'
 dotenv.config()
 const app = express();
 
-
+app.get("/env-check", (req, res) => {
+  res.json({ jwtSecret: process.env.JWT_SECRET || "NOT SET" });
+});
 const PORT = process.env.PORT || 4000;
 app.use(express.json())
 app.use(cors({ origin: '*' }));
