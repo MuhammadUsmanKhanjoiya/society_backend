@@ -15,13 +15,13 @@ const verifyToken = (req, res, next) => {
 
 
     // Check if JWT_SECRET exists
-    if (!process.env.APP_society_jwt_secret) {
+    if (!process.env.APP_SOCIETY_JWT_SECRET) {
       console.error("JWT_SECRET is not set!")
       return res.status(500).json({ message: "Server configuration error" })
     }
 
     try {
-      const decodrd = jwt.verify(token, process.env.APP_society_jwt_secret , (err, decoded) => {
+      const decodrd = jwt.verify(token, process.env.APP_SOCIETY_JWT_SECRET , (err, decoded) => {
         if (err) {
           console.error("JWT Verification Error:", err.message); // DEBUG
           return res.status(401).json({ message: "Token is not valid" });
