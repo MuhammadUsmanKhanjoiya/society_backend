@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
     // Check if JWT_SECRET exists
     if (!process.env.APP_SOCIETY_JWT_SECRET) {
       console.error("JWT_SECRET is not set!")
-      return res.status(500).json({ message: "Server configuration error" , error: "JWT_SECRET is not set" , token: token});
+      return res.status(500).json({ message: "Server configuration error JWT_SECRET is not set!",error:error.message , error: "JWT_SECRET is not set" , token: token});
    
     }
 
